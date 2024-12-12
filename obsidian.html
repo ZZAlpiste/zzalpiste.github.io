@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Título da Página">
-    <meta property="og:description" content="Uma breve descrição do conteúdo desta página.">
-    <meta property="og:image" content="https://exemplo.com/imagem.jpg">
-    <meta property="og:url" content="https://exemplo.com">
-    <title>Título da Página</title>
+    <title>Obsidian</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtém os parâmetros da URL
+            const params = new URLSearchParams(window.location.search);
+            const param1 = params.get('vault');
+            const param2 = params.get('file');
+
+            // Verifica se os parâmetros existem
+            if (param1 && param2) {
+                // Cria a URL de redirecionamento
+                const targetUrl = `obsidian://open?vault=${encodeURIComponent(vault)}&file=${encodeURIComponent(file)}`;
+
+                // Redireciona para a nova URL
+                window.location.href = targetUrl;
+            } else {
+                // Mostra uma mensagem de erro caso os parâmetros não estejam completos
+                document.body.innerHTML = '<h1>Parâmetros "vault" e "file" são necessários.</h1>';
+            }
+        });
+    </script>
 </head>
 <body>
-    <h1>Bem-vindo à Página</h1>
-    <p>Este é um exemplo simples para demonstrar os metadados necessários para gerar rich links.</p>
+    <p>Redirecionando...</p>
 </body>
 </html>
