@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtém os parâmetros da URL
+            const params = new URLSearchParams(window.location.search);
+            const param1 = params.get('hash');
+
+            // Verifica se os parâmetros existem
+            if (hash) {
+                // Cria a URL de redirecionamento
+                const targetUrl = `https://mail.google.com/mail/u/0/#inbox/${encodeURIComponent(param1)}`;
+
+                // Redireciona para a nova URL
+                window.location.href = targetUrl;
+            } else {
+                // Mostra uma mensagem de erro caso os parâmetros não estejam completos
+                document.body.innerHTML = '<h1>O parâmetro "hash" é necessário.</h1>';
+            }
+        });
+    </script>
+</head>
+<body>
+    <p>Redirecionando...</p>
+</body>
+</html>
