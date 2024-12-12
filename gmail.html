@@ -11,9 +11,9 @@
             const param1 = params.get('hash');
 
             // Verifica se os parâmetros existem
-            if (params) {
+            if (param1) {
                 // Cria a URL de redirecionamento
-                const targetUrl = `https://mail.google.com/mail/u/0/#inbox/${encodeURIComponent(params)}`;
+                const targetUrl = `https://mail.google.com/mail/u/0/#inbox/${encodeURIComponent(param1)}`;
 
                 // Exibe a URL de redirecionamento
                 document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>`;
