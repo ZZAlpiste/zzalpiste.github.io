@@ -6,23 +6,24 @@
     <title>Gmail</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Obtém os parâmetros da URL
-            const params = new URLSearchParams(window.location.search);
-            const param1 = params.get('hash');
+            // Obtém os parâmetros da URL como lista
+            const params = window.location.search.slice(1).split('&');
 
-            // Verifica se os parâmetros existem
-            if (param1) {
+            // Verifica se ao menos dois parâmetros foram fornecidos
+            if (params.length >= 1) {
+                const param1 = params[0];
+
                 // Cria a URL de redirecionamento
                 const targetUrl = `https://mail.google.com/mail/u/0/#inbox/${encodeURIComponent(param1)}`;
 
-                // Exibe a URL de redirecionamento
-                document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>`;
-                
+                // Exibe a URL de redirecionamento sem nomes dos parâmetros
+                document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${param1}/${param2}</a></p>`;
+
                 // Redireciona para a nova URL
                 window.location.href = targetUrl;
             } else {
-                // Mostra uma mensagem de erro caso os parâmetros não estejam completos
-                document.body.innerHTML = '<h1>O parâmetro "hash" é necessário.</h1>';
+                // Mostra uma mensagem de erro caso o parâmetro
+                document.body.innerHTML = '<h1>Um parâmetro é necessários na URL.</h1>';
             }
         });
     </script>
