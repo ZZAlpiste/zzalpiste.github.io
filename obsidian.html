@@ -14,13 +14,16 @@
             // Verifica se os parâmetros existem
             if (param1 && param2) {
                 // Cria a URL de redirecionamento
-                const targetUrl = `obsidian://open?vault=${encodeURIComponent(vault)}&file=${encodeURIComponent(file)}`;
+                const targetUrl = `obsidian://open?vault=${encodeURIComponent(param1)}&file=${encodeURIComponent(param2)}`;
+
+                // Exibe a URL de redirecionamento
+                document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>`;
 
                 // Redireciona para a nova URL
                 window.location.href = targetUrl;
             } else {
                 // Mostra uma mensagem de erro caso os parâmetros não estejam completos
-                document.body.innerHTML = '<h1>Os parâmetros "vault" e "file" são necessários.</h1>';
+                document.body.innerHTML = '<h1>Parâmetros "vault" e "file" são necessários.</h1>';
             }
         });
     </script>
