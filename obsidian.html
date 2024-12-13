@@ -14,10 +14,13 @@
                 const param1 = params[0];
                 const param2 = params[1];
 
+                // Define o título da página com os parâmetros
+                document.title = `Obsidian - ${param1} / ${param2}`;
+
                 // Cria a URL de redirecionamento
                 const targetUrl = `obsidian://open?vault=${encodeURIComponent(param1)}&file=${encodeURIComponent(param2)}`;
 
-                // Exibe a URL de redirecionamento sem nomes dos parâmetros
+                // Exibe a URL de redirecionamento
                 document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${param1}/${param2}</a></p>`;
 
                 // Redireciona para a nova URL
