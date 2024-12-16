@@ -26,7 +26,7 @@
                 document.title = `Ok - Obsidian vault=${param1} file=${param2}`;
 
                 // Cria a URL de redirecionamento
-                const targetUrl = `obsidian://open?vault=${encodeURIComponent(param1)}&file=${encodeURIComponent(param2)}`;
+                const targetUrl = `obsidian://open?vault=${param1}&file=${param2}`;
 
                 // Exibe a URL de redirecionamento
                 document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>`;
