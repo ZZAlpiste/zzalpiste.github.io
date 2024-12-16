@@ -14,33 +14,51 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Obtém os parâmetros da URL como lista
-            const params = window.location.search.slice(1).split('&');
+            // Obtém os parâmetros da URL
+            const params = new URLSearchParams(window.location.search);
+            const param1 = params.get('vault');
+            const param2 = params.get('file');
 
-            // Verifica se ao menos dois parâmetros foram fornecidos
-            if (params.length >= 2) {
-                const param1 = params[0];
-                const param2 = params[1];
+            // Validação de parâmetros
+            if (param1 && param2) {
+                // Decodifica os parâmetros antes de codificar novamente
+                const decodedParam1 = decodeURIComponent(param1);
+                const decodedParam2 = decodeURIComponent(param2);
 
-                // Define o título da página com os parâmetros
-                document.title = `Ok - Obsidian vault=${param1} file=${param2}`;
+                // Codifica os parâmetros para a URL do Obsidian
+                const encodedVault = encodeURIComponent(decodedParam1);
+                const encodedFile = encodeURIComponent(decodedParam2);
+
+                // Define o título da página
+                document.title = `Ok - Obsidian vault=${decodedParam1} file=${decodedParam2}`;
 
                 // Cria a URL de redirecionamento
-                const targetUrl = `obsidian://open?vault=${encodeURIComponent(param1)}&file=${encodeURIComponent(param2)}`;
+                const targetUrl = `obsidian://open?vault=${encodedVault}&file=${encodedFile}`;
 
                 // Exibe a URL de redirecionamento
-                document.body.innerHTML = `<p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>`;
+                document.body.innerHTML = `
+                    <p>Redirecionando para: <a href="${targetUrl}">${targetUrl}</a></p>
+                    <p>Se o redirecionamento não funcionar automaticamente, clique no link acima.</p>
+                `;
 
-                // Redireciona para a nova URL
+                // Tenta redirecionar
                 window.location.href = targetUrl;
 
-                // Fecha a guia após o redirecionamento
+                // Fecha a aba após o redirecionamento
                 setTimeout(() => {
-                    window.close();
-                }, 1000); // Aguarda 1 segundo antes de fechar
+                    try {
+                        window.close();
+                    } catch (e) {
+                        console.log("Não foi possível fechar a aba automaticamente.");
+                    }
+                }, 1000); // Aguarda 1 segundo
             } else {
-                // Mostra uma mensagem de erro caso os parâmetros não estejam completos
-                document.body.innerHTML = '<h1>Dois valores são necessários na URL.</h1>';
+                // Mensagem de erro para parâmetros ausentes
+                document.body.innerHTML = `
+                    <h1>Parâmetros inválidos!</h1>
+                    <p>Certifique-se de fornecer os valores corretos na URL.</p>
+                    <p>Formato esperado: <code>?vault=NOME_DO_VAULT&file=CAMINHO_DO_ARQUIVO</code></p>
+                `;
             }
         });
     </script>
